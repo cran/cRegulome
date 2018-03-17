@@ -1,6 +1,6 @@
 Package: cRegulome
 Type: Package
-Version: 0.1.0
+Version: 0.1.1
 Title: Obtain and Visualize Regulome-Gene Expression Correlations in
         Cancer
 Description: Builds a 'SQLite' database file of pre-calculated transcription 
@@ -19,13 +19,13 @@ LazyData: true
 RoxygenNote: 6.0.1
 Depends: R(>= 2.10.0)
 Imports: DBI, graphics, httr, RSQLite, UpSetR, VennDiagram, magrittr,
-        dplyr, ggplot2, ggridges, tidyr, reshape2, purrr, grid, R.utils
+        dplyr, ggplot2, ggridges, tidyr, reshape2, purrr, grid,
+        R.utils, AnnotationDbi, org.Hs.eg.db, clusterProfiler
 VignetteBuilder: knitr
-Suggests: knitr, rmarkdown, testthat, covr, dbplyr, clusterProfiler,
-        igraph, org.Hs.eg.db, readxl, AnnotationDbi, BiocInstaller
+Suggests: knitr, rmarkdown, testthat, covr, dbplyr, igraph, readxl
 NeedsCompilation: no
-Packaged: 2018-02-13 02:07:08 UTC; rstudio
+Packaged: 2018-03-17 04:39:30 UTC; root
 Author: Mahmoud Ahmed [aut, cre]
 Maintainer: Mahmoud Ahmed <mahmoud.s.fahmy@students.kasralainy.edu.eg>
 Repository: CRAN
-Date/Publication: 2018-02-13 09:44:49 UTC
+Date/Publication: 2018-03-17 04:46:16 UTC

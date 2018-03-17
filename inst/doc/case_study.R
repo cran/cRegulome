@@ -1,15 +1,6 @@
 ## ---- echo=FALSE---------------------------------------------------------
 knitr::opts_chunk$set(message = FALSE, warning = FALSE, fig.align = 'center')
 
-## ----install_suggested_package-------------------------------------------
-if (!require(BiocInstaller)) source("https://bioconductor.org/biocLite.R")
-if (!require(org.Hs.eg.db)) biocLite("org.Hs.eg.db")
-if (!require(AnnotationDbi)) biocLite("AnnotationDbi")
-if (!require(clusterProfiler)) biocLite("clusterProfiler")
-
-if (!require(igraph)) install.packages("igraph")
-if (!require(readxl)) install.packages("readxl")
-
 ## ----load_libraries------------------------------------------------------
 library(cRegulome)
 library(readxl)
