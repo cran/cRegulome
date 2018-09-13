@@ -92,6 +92,9 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
 }
@@ -201,28 +204,24 @@ dat_mir &lt;- get_mir(conn,
 # query the db for two transcription factors
 dat_tf &lt;- get_tf(conn,
                  tf = c('LEF1', 'MYB'),
-                 study = 'STES*')
+                 study = '&quot;STES*&quot;')
 
 # show first 6 line of each of the data.frames
 head(dat_mir); head(dat_tf)</code></pre>
-<pre><code>## # A tibble: 6 x 4
-##   mirna_base feature  study   cor
-##   &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt;
-## 1 hsa-let-7i ARHGAP20 STES  0.400
-## 2 hsa-let-7i GAS7     STES  0.400
-## 3 hsa-let-7g ARHGEF15 STES  0.390
-## 4 hsa-let-7g LSM11    STES  0.380
-## 5 hsa-let-7g STARD13  STES  0.380
-## 6 hsa-let-7g CXorf36  STES  0.360</code></pre>
-<pre><code>## # A tibble: 6 x 4
-##   tf    feature  study   cor
-##   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt;
-## 1 LEF1  ENOX1    STES* 0.680
-## 2 LEF1  KIAA1755 STES* 0.670
-## 3 LEF1  OLFML1   STES* 0.660
-## 4 LEF1  RFTN1    STES* 0.660
-## 5 LEF1  ZNF423   STES* 0.660
-## 6 LEF1  GLI1     STES* 0.650</code></pre>
+<pre><code>##   mirna_base feature   cor study
+## 1 hsa-let-7g    ABL2  0.11  STES
+## 2 hsa-let-7g  ACTR10 -0.16  STES
+## 3 hsa-let-7g  ACVR1C -0.13  STES
+## 4 hsa-let-7g ADAMTS1  0.27  STES
+## 5 hsa-let-7g ADAMTS5  0.20  STES
+## 6 hsa-let-7g   ADCY9  0.18  STES</code></pre>
+<pre><code>##     tf feature  cor   study
+## 1 LEF1     A2M 0.55 &quot;STES*&quot;
+## 2 LEF1  A4GALT 0.40 &quot;STES*&quot;
+## 3 LEF1   ABCA1 0.44 &quot;STES*&quot;
+## 4 LEF1   ABCA6 0.54 &quot;STES*&quot;
+## 5 LEF1   ABCA8 0.41 &quot;STES*&quot;
+## 6 LEF1   ABCA9 0.48 &quot;STES*&quot;</code></pre>
 </div>
 <div id="objects" class="section level2">
 <h2>Objects</h2>
@@ -234,13 +233,13 @@ class(ob_mir)</code></pre>
 <pre><code>## [1] &quot;cmicroRNA&quot;</code></pre>
 <pre class="r"><code>str(ob_mir)</code></pre>
 <pre><code>## List of 4
-##  $ microRNA: chr [1:2] &quot;hsa-let-7i&quot; &quot;hsa-let-7g&quot;
-##  $ features: chr [1:612] &quot;ARHGAP20&quot; &quot;GAS7&quot; &quot;ARHGEF15&quot; &quot;LSM11&quot; ...
+##  $ microRNA: chr [1:2] &quot;hsa-let-7g&quot; &quot;hsa-let-7i&quot;
+##  $ features: chr [1:612] &quot;ABL2&quot; &quot;ACTR10&quot; &quot;ACVR1C&quot; &quot;ADAMTS1&quot; ...
 ##  $ studies : chr &quot;STES&quot;
-##  $ corr    :'data.frame':    612 obs. of  3 variables:
-##   ..$ feature   : chr [1:612] &quot;A1CF&quot; &quot;AAK1&quot; &quot;AASS&quot; &quot;ABCC10&quot; ...
-##   ..$ hsa-let-7g: num [1:612] NA NA NA NA 0.11 NA NA NA -0.16 NA ...
-##   ..$ hsa-let-7i: num [1:612] -0.2 0.12 0.14 -0.1 0.27 -0.12 0.13 0.1 NA 0.23 ...
+##  $ corr    :List of 1
+##   ..$ STES:'data.frame': 612 obs. of  2 variables:
+##   .. ..$ hsa-let-7g: num [1:612] NA NA NA NA 0.11 NA NA NA -0.16 NA ...
+##   .. ..$ hsa-let-7i: num [1:612] -0.2 0.12 0.14 -0.1 0.27 -0.12 0.13 0.1 NA 0.23 ...
 ##  - attr(*, &quot;class&quot;)= chr &quot;cmicroRNA&quot;</code></pre>
 <pre class="r"><code># explore the cTF object
 ob_tf &lt;- cTF(dat_tf)
@@ -249,12 +248,12 @@ class(ob_tf)</code></pre>
 <pre class="r"><code>str(ob_tf)</code></pre>
 <pre><code>## List of 4
 ##  $ TF      : chr [1:2] &quot;LEF1&quot; &quot;MYB&quot;
-##  $ features: chr [1:1953] &quot;ENOX1&quot; &quot;KIAA1755&quot; &quot;OLFML1&quot; &quot;RFTN1&quot; ...
-##  $ studies : chr &quot;STES*&quot;
-##  $ corr    :'data.frame':    1953 obs. of  3 variables:
-##   ..$ feature: chr [1:1953] &quot;A2M&quot; &quot;A4GALT&quot; &quot;ABCA1&quot; &quot;ABCA6&quot; ...
-##   ..$ LEF1   : num [1:1953] 0.55 0.4 0.44 0.54 0.41 0.48 0.56 0.43 0.54 0.45 ...
-##   ..$ MYB    : num [1:1953] NA NA NA NA NA NA NA NA NA NA ...
+##  $ features: chr [1:1953] &quot;A2M&quot; &quot;A4GALT&quot; &quot;ABCA1&quot; &quot;ABCA6&quot; ...
+##  $ studies : chr &quot;\&quot;STES*\&quot;&quot;
+##  $ corr    :List of 1
+##   ..$ &quot;STES*&quot;:'data.frame':  1953 obs. of  2 variables:
+##   .. ..$ LEF1: num [1:1953] 0.55 0.4 0.44 0.54 0.41 0.48 0.56 0.43 0.54 0.45 ...
+##   .. ..$ MYB : num [1:1953] NA NA NA NA NA NA NA NA NA NA ...
 ##  - attr(*, &quot;class&quot;)= chr &quot;cTF&quot;</code></pre>
 </div>
 <div id="methods" class="section level2">
@@ -272,13 +271,13 @@ methods(class = 'cTF')</code></pre>
 ## see '?methods' for accessing help and source code</code></pre>
 <pre class="r"><code># tidy method
 head(cor_tidy(ob_mir))</code></pre>
-<pre><code>##   feature mirna_base   cor study
-## 1    ABL2 hsa-let-7g  0.11  STES
-## 2  ACTR10 hsa-let-7g -0.16  STES
-## 3  ACVR1C hsa-let-7g -0.13  STES
-## 4 ADAMTS1 hsa-let-7g  0.27  STES
-## 5 ADAMTS5 hsa-let-7g  0.20  STES
-## 6   ADCY9 hsa-let-7g  0.18  STES</code></pre>
+<pre><code>##    mirna_base feature   cor study
+## 5  hsa-let-7g    ABL2  0.11  STES
+## 9  hsa-let-7g  ACTR10 -0.16  STES
+## 11 hsa-let-7g  ACVR1C -0.13  STES
+## 13 hsa-let-7g ADAMTS1  0.27  STES
+## 16 hsa-let-7g ADAMTS5  0.20  STES
+## 17 hsa-let-7g   ADCY9  0.18  STES</code></pre>
 <pre class="r"><code># cor_hist method
 cor_hist(ob_mir,
      breaks = 100,
