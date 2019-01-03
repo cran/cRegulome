@@ -52,6 +52,12 @@ db_file = paste(tempdir(), 'cRegulome.db', sep = '/')
 conn <- dbConnect(SQLite(), db_file)
 ```
 
+```{bash eval=FALSE}
+# alternative to downloading the database file
+wget https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/9537385/cRegulome.db.gz
+gunzip cRegulome.db.gz
+```
+
 ```{r connect_db, include=FALSE}
 # locate the testset file and connect
 fl <- system.file('extdata', 'cRegulome.db', package = 'cRegulome')
@@ -147,7 +153,7 @@ dat_mir <- get_mir(conn,
 # query the db for two transcription factors
 dat_tf <- get_tf(conn,
                  tf = c('LEF1', 'MYB'),
-                 study = '"STES*"')
+                 study = 'STES')
 
 # show first 6 line of each of the data.frames
 head(dat_mir); head(dat_tf)

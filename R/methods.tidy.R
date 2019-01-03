@@ -108,6 +108,7 @@ cor_tidy.cTF <- function(ob) {
 #' objects. 
 #' 
 #' @inheritParams cor_plot
+#' @param directed A \code{logical} when \code{FALSE} the graph is indirected
 #'
 #' @return An \code{igraph} object 
 #' 
@@ -134,12 +135,12 @@ cor_tidy.cTF <- function(ob) {
 #' @importFrom igraph graph_from_data_frame
 #' 
 #' @export
-cor_igraph <- function(ob) {
+cor_igraph <- function(ob, directed = FALSE) {
     UseMethod('cor_igraph')
 }
 
 #' @export
-cor_igraph.cmicroRNA <- function(ob) {
+cor_igraph.cmicroRNA <- function(ob, directed = FALSE) {
     # get a tidy data.frame of the object
     dat <- cor_tidy(ob)
     
@@ -165,14 +166,14 @@ cor_igraph.cmicroRNA <- function(ob) {
     
     # make graph
     g <- graph_from_data_frame(d = edgs,
-                               directed = FALSE,
-                               vrtcs)
+                               vertices = vrtcs,
+                               directed = directed)
     # return graph
     return(g)
 }
 
 #' @export
-cor_igraph.cTF <- function(ob) {
+cor_igraph.cTF <- function(ob, directed = FALSE) {
     # get a tidy data.frame of the object
     dat <- cor_tidy(ob)
     
@@ -198,8 +199,8 @@ cor_igraph.cTF <- function(ob) {
     
     # make graph
     g <- graph_from_data_frame(d = edgs,
-                               directed = FALSE,
-                               vrtcs)
+                               vertices = vrtcs,
+                               directed = directed)
     
     # return graph
     return(g)
@@ -207,7 +208,7 @@ cor_igraph.cTF <- function(ob) {
 
 #' Prepare correlation data for plotting
 #' 
-#' Not meant to be called direclty by the user.
+#' Not meant to be called directly by the user.
 #'
 #' @param ob A \link{cmicroRNA} or \link{cTF} object such as this returned by
 #' calling \link{cmicroRNA} or \link{cTF}.
@@ -218,7 +219,7 @@ cor_igraph.cTF <- function(ob) {
 #' @param add_dir A \code{logical} default TRUE for whether to add a column
 #' called Direction that has the direction of the correlation; positive or 
 #' negative.
-#' @param add_corr A \code{logical} default TRUE for whether to add a colum
+#' @param add_corr A \code{logical} default TRUE for whether to add a column
 #' called Correlation that has the absolute value of the correlation
 #'
 #' @return A \code{data.frame}

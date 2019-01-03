@@ -48,7 +48,7 @@ conn <- dbConnect(SQLite(), fl)
 # query the database
 creg_tf <- get_tf(conn,
                   tf = unique(tf$SOURCE),
-                  study = '"STES*"',
+                  study = 'STES',
                   targets_only = TRUE)
 
 creg_mir <- get_mir(conn,
@@ -84,7 +84,7 @@ cor_upset(ob_mir)
 # query cRegulome to get high correlated targets
 creg_tf <- get_tf(conn,
                   tf = unique(tf$SOURCE),
-                  study = '"STES*"',
+                  study = 'STES',
                   min_abs_cor = .3,
                   targets_only = TRUE)
 creg_mir <- get_mir(conn,
